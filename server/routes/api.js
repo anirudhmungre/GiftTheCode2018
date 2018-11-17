@@ -1,6 +1,6 @@
 "use strict"
 const express = require('express')
-const mysql = require('mysql')
+const { OurSQL } = require('../components/oursql')
 let router = express.Router()
 const { resp } = require('../components/response')
 
@@ -14,6 +14,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/test', (req, res) => {
+    let q = new OurSQL()
+    q.establishConnection()
     return res.json(resp.make()
         .setError(null)
         .setResponseCode(200)
