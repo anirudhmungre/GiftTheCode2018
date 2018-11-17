@@ -1,4 +1,4 @@
-INSERT INTO Cat (id, cName, dob, img, sex, breed, behavior, bondedID, outcome, locId, adopterID)
+INSERT INTO Cat (id, cName, dob, img, sex, breed, behavior, pair, stat, locId, adopterID)
 /*ID should really be autoIncremented */
 /*We should create a locID for adopted cats, for a placeholder, I am using -1. We also need to have a similar value for Euthanized :(*/
 /*Outcome could be removed as the information is ESSENTIALLY stored in location*/
