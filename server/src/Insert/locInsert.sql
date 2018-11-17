@@ -5,6 +5,6 @@ INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (3, "1000 Bloor St, Toron
 INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (4, "1200 Bloor St, Toronto", 'Shelter', '2018-11-10', NULL);
 INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (5, "923 Danforth Ave, Toronto", 'Store', '2018-11-02', NULL);
 INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (6, "857 Danforth Ave, Toronto", 'Store', '2018-11-04', NULL);
-INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (7, "3240 Bay St, Toronto", 'Store', '2018-11-10', NULL);
-INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (8, "2102 Bay St, Toronto", 'Vet', '2018-11-10', '2018-11-11');
+INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (7, "3240 Bay St, Toronto", 'Vet', '2018-11-10', '2018-11-11');
+INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (8, "2102 Bay St, Toronto", 'Volunteer Centre', '2018-11-10', NULL);
 INSERT INTO Loc(id, addr, typ, inDate, outDate) VALUES (9, "1958 Bay St, Toronto", 'Volunteer Centre', '2018-11-08', NULL);
