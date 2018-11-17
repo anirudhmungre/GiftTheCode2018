@@ -4,8 +4,11 @@ CREATE TABLE IF NOT EXISTS Adopter(
     aAddress    VARCHAR(256),
     email       VARCHAR(128),
     phone       INT(10),
-    screenDate  DATE(),
+    screenDate  DATE,
+    staffConfirmationID INT,
+    catId       INT,
     screenRes   VARCHAR(1) CHECK (type IN ('Pass', 'Fail')),
-    locID       INT NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (staffConfirmationID) REFERENCES Staff(id),
+    FOREIGN KEY (catId) REFERENCES Cat(id)
 );
