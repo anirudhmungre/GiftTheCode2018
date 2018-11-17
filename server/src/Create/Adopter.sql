@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS Adopter(
     screenDate  DATE,
     staffConfirmationID INT,
     catId       INT,
-    screenRes   VARCHAR(1) CHECK (type IN ('Pass', 'Fail')),
+    screenRes   BIT CHECK (flvTested IN (1, 0, NULL)),
     PRIMARY KEY (id)
 );

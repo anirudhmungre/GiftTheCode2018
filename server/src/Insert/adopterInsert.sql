@@ -1,0 +1,5 @@
+INSERT INTO Adopter(id, aName, aAddress, email, phone, screenDate, staffConfirmationID, catId, screenRes) VALUES (0, 'John Smith', '2000 Simcoe St North, Oshawa', 'jsmith@outlook.com', 2221113333, '2018-11-10', StaffID, 2, 1);
+INSERT INTO Adopter(id, aName, aAddress, email, phone, screenDate, staffConfirmationID, catId, screenRes) VALUES (1, 'Mary Brown', '123 Candyland Lane, Candyland', 'mbrown@sympatico.ca', 1112223333, '2018-11-05', StaffID, 6, 1);
+INSERT INTO Adopter(id, aName, aAddress, email, phone, screenDate, staffConfirmationID, catId, screenRes) VALUES (2, 'James Steel', '1200 Main St, Stouffville', 'jsteel@yahoo.ca', 3332221111, '2018-11-04', StaffID, CatID, 1);
+INSERT INTO Adopter(id, aName, aAddress, email, phone, screenDate, staffConfirmationID, catId, screenRes) VALUES (3, 'Timothy Sanders', '1423 Adelaide Ave, Toronto', 'tsanders@gmail.com', 2223331111, '2018-09-21', StaffID, CatID, 1);
+INSERT INTO Adopter(id, aName, aAddress, email, phone, screenDate, staffConfirmationID, catId, screenRes) VALUES (4, 'Paul Walker', '1 Park Dr, Ottawa', 'pwalker@outlook.com', 4442221111, '2018-10-31', StaffID, CatID, 1);
