@@ -5,6 +5,20 @@ const { OurSQL } = require('../components/oursql')
 let router = express.Router()
 let sql = new OurSQL()
 
+const birth = (isoDate) => {
+    date = new Date(isoDate)
+    year = date.getFullYear()
+    month = date.getMonth()+1
+    dt = date.getDate()
+    if (dt < 10) {
+        dt = '0' + dt
+    }
+    if (month < 10) {
+        month = '0' + month
+    }
+    return (year+'-' + month + '-'+dt)
+}
+
 router.get('/', (req, res) => {
     return res.json(resp.make()
         .setResponseCode(200)
@@ -16,7 +30,7 @@ router.get('/add', (req, res) => {
     let post = {
         id: req.body.hashId,
         cName: req.body.name,
-        dob: req.body.dob,
+        dob: birth(req.body.dob),
         sex: req.body.sex,
         breed: req.body.breed,
         behavior: req.body.behavior,
@@ -46,7 +60,7 @@ router.get('/edit', (req, res) => {
     let post = {
         id: req.body.id,
         cName: req.body.name,
-        dob: req.body.dob,
+        dob: birth(req.body.dob),
         sex: req.body.sex,
         breed: req.body.breed,
         behavior: req.body.behavior,
@@ -93,21 +107,43 @@ router.get('/all', (req, res) => {
 })
 
 router.get('/local', (req, res) => {
-    return res.json(resp.make()
-        
-    )
+    sql.query('SELECT * FROM Cat WHERE locId=?;', [req.body.locId],
+    (results, fields) => {
+        sql.quitConnection()
+        return res.json(resp.make()
+            .setMessage("Query successful!")
+            .setResponseCode(200)
+            .setdata(results)
+        )
+    }, (error) => {
+        if (error){
+            return res.json(resp.make()
+                .setError(error)
+                .setResponseCode(500)
+                .setMessage("There was an error :(")
+            )
+        }
+    })
 })
 
 router.get('/pair', (req, res) => {
-    return res.json(resp.make()
-        
-    )
-})
-
-router.get('/add', (req, res) => {
-    return res.json(resp.make()
-        
-    )
+    sql.query('SELECT * FROM Cat WHERE pair NOT NULL;',
+    (results, fields) => {
+        sql.quitConnection()
+        return res.json(resp.make()
+            .setMessage("Query successful!")
+            .setResponseCode(200)
+            .setdata(results)
+        )
+    }, (error) => {
+        if (error){
+            return res.json(resp.make()
+                .setError(error)
+                .setResponseCode(500)
+                .setMessage("There was an error :(")
+            )
+        }
+    })
 })
 
 module.exports = router
