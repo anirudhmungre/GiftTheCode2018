@@ -2,11 +2,11 @@
   <div class="home">
       <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
-        <span class="md-title">Toronto Cat Rescue | Cat Portal</span>
+        <span class="md-title">Toronto Cat Rescue</span>
       </md-app-toolbar>
       <md-app-drawer md-permanent="full">
         <md-toolbar class="md-transparent" md-elevation="0">
-          Navigation
+          <img src="../assets/logo_colour.png" />
         </md-toolbar>
         <md-list>
           <router-link to="/dashboard">
