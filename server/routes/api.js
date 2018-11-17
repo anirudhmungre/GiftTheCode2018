@@ -25,12 +25,27 @@ router.get('/test', (req, res) => {
     )
 })
 
-router.get('/viewCats', (req, res) => {
-    let sQuery, result
-    sQuery = fs.readFile('../src/Query/adoptableCats.sql', 'utf-8')
+router.get('/adoptableCats', (req, res) => {
     sql.establishConnection()
-    result = sql.query(sQuery, function(){
-        sql.quitConnection()
+    fs.readFile('./src/Query/adoptableCats.sql', 'utf-8', (err, sQuery) => {
+        // console.error(err)
+        sql.query(sQuery, 
+            (result, fields) =>{
+                return res.json(resp.make()
+                    .setMessage("Query Successful!")
+                    .setReponseCode(200)
+                    .setData(result)
+                )
+            }, (err, result) => {
+            if (err){
+                return res.json(resp.make()
+                    .setError(err)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+            sql.quitConnection()
+        })
     })
 })
 

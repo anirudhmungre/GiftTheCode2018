@@ -17,7 +17,7 @@ class OurSQL {
         })
         logger("Created db connection", 1)
     }
-    establishConnection(callback) {
+    establishConnection() {
         logger("Opening db connection", 1)
         this.connection.connect(function (error) {
             if (error) {
@@ -45,10 +45,11 @@ class OurSQL {
             }
         })
     }
-    query(sqlStatement, callback) {
+    query(sqlStatement, callback, errCallback) {
         return this.connection.query(sqlStatement, function (error, results, fields) {
             if (error) {
                 logger("Error querrying the db: " + JSON.stringify(error), 3)
+                errCallback(error)
             } else {
                 callback(results, fields)
             }
