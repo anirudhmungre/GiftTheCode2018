@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS Adopter(
     email       VARCHAR(128),
     phone       INT(10),
     screenDate  DATE,
-    staffConfirmationID INT,
+    userConfirmationId INT,
     catId       INT,
     screenRes   BIT CHECK (flvTested IN (1, 0, NULL)),
     PRIMARY KEY (id)
