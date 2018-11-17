@@ -36,10 +36,11 @@ class OurSQL {
 
         })
     }
-    query(sqlStatement, inserts, callback) {
+    query(sqlStatement, inserts, callback, errCallback) {
         return this.connection.query(sqlStatement, inserts, function (error, results, fields) {
             if (error) {
                 logger("Error querrying the db: " + JSON.stringify(error), 3)
+                errCallback(error)
             } else {
                 callback(results, fields)
             }
