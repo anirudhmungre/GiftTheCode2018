@@ -1,9 +1,7 @@
 "use strict"
 const mysql = require('mysql')
 const { logger } = require('./logging')
-const {
-    dbconfig
-} = require('./databaseCred.hide')
+const { dbconfig } = require('./databaseCred.hide')
 
 class OurSQL {
     constructor() {
