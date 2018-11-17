@@ -10,6 +10,7 @@ export default {
 }
 </script>
 
+
 <style lang="scss">
   @import "~vue-material/dist/theme/engine";
   @include md-register-theme("default", (

@@ -1,0 +1,17 @@
+{
+  "name": "toronto-cat-rescue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dddos": "^0.1.2",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "mysql": "^2.16.0"
+  }
+}

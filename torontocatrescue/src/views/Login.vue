@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "login",
+  name: "App",
   data() {
     return {
       loading: false,
@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .centered-container {
   display: flex;
   align-items: center;
