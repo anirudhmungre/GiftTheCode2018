@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS Cat(
     sex         CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
-    outcome     VARCHAR(64),
+    stat        BIT CHECK (fixed IN (1, 0, NULL)) DEFAULT 0,
     locId       INT NOT NULL,
-    adopterID   INT,
+    adopterId   INT,
     PRIMARY KEY(id)
 );
