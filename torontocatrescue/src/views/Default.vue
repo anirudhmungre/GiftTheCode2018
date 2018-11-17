@@ -52,16 +52,13 @@ export default {
   .md-app {
     height: 100vh;
   }
-
   .md-app-content {
     background: rgb(236, 236, 236);
   }
-
   .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
   }
-
   img {
     padding: 1em;
   }
