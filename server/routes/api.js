@@ -1,9 +1,10 @@
 "use strict"
 const express = require('express')
 const { OurSQL } = require('../components/oursql')
-let router = express.Router()
 const { resp } = require('../components/response')
-
+const fs = require('fs')
+let router = express.Router()
+let sql = new OurSQL()
 router.get('/', (req, res) => {
     return res.json(resp.make()
         .setError(null)
@@ -14,8 +15,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/test', (req, res) => {
-    let q = new OurSQL()
-    q.establishConnection()
     return res.json(resp.make()
         .setError(null)
         .setResponseCode(200)
@@ -24,6 +23,15 @@ router.get('/test', (req, res) => {
             "KEY": "VALUE"
         })
     )
+})
+
+router.get('/viewCats', (req, res) => {
+    let sQuery, result
+    sQuery = fs.readFile('../src/Query/availableCats.sql', 'utf-8')
+    sql.establishConnection()
+    result = sql.query(sQuery, function(){
+        sql.quitConnection()
+    })
 })
 
 
