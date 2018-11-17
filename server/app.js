@@ -19,6 +19,9 @@ try {
     logger("Loading routes", 1)
     const index = require('./routes/index')
     const api = require('./routes/api')
+    const cat = require('./routes/cat')
+    const user = require('./routes/user')
+
     logger("Setting up middleware", 1)
     app.use(logMiddle())
     app.use(cors())
@@ -41,6 +44,8 @@ try {
     app.set('port', PORT)
     app.use('/', index)
     app.use('/api', api)
+    app.use('/api/cat', cat)
+    app.use('/api/user', user)
 
     http.listen(PORT)
     logger("Listening on port " + PORT, 1)
