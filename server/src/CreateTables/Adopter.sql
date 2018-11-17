@@ -8,7 +8,5 @@ CREATE TABLE IF NOT EXISTS Adopter(
     staffConfirmationID INT,
     catId       INT,
     screenRes   VARCHAR(1) CHECK (type IN ('Pass', 'Fail')),
-    PRIMARY KEY (id),
-    FOREIGN KEY (staffConfirmationID) REFERENCES Staff(id),
-    FOREIGN KEY (catId) REFERENCES Cat(id)
+    PRIMARY KEY (id)
 );

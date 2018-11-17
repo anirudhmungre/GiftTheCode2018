@@ -24,6 +24,9 @@
       <div class="loading-overlay" v-if="loading">
         <md-progress-spinner md-mode="indeterminate" :md-stroke="2"></md-progress-spinner>
       </div>
+      <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d638.8468381582909!2d-79.36483221438756!3d43.651482150751434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x89d4cb3be80f60ab%3A0x42bc6bb30144c49e!2sThe+Globe+and+Mail+Centre%2C+351+King+St+E+%231600%2C+Toronto%2C+ON+M5A+0N1!3m2!1d43.6513856!2d-79.3643756!4m5!1s0x539ff9a41940041f%3A0xe323899d4b935c12!2sDollarama!3m2!1d43.6511376!2d-79.3650767!5e0!3m2!1sen!2sca!4v1542448128004" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
     </md-content>
     <div class="background" />
   </div>

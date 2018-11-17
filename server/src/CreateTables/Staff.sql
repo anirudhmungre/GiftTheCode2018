@@ -6,6 +6,5 @@ CREATE TABLE IF NOT EXISTS Staff(
     phone        INT(10),
     empType      VARCHAR(64) CHECK (type IN ('Paid', 'Volunteer', 'CEO'))
     locID        INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (locID) REFERENCES Loc(id)
+    PRIMARY KEY (id)
 );
