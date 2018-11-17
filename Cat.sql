@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Cat(
     id          INT NOT NULL,
-    name        VARCHAR(64),
+    cName       VARCHAR(64),
     dob         DATE,
     sex         CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     breed       VARCHAR(64),
