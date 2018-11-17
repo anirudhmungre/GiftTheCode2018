@@ -5,6 +5,9 @@ ALTER TABLE Cat (
 
 ALTER TABLE Adopter (
     ADD CONSTRAINT fKeyStaffConfirmation FOREIGN KEY (staffConfirmationID) REFERENCES Staff(id),
-    ADD CONSTRAINT fKeyCatID FOREIGN KEY (catId) REFERENCES Cat(id)
+    ADD CONSTRAINT fKeyACatID FOREIGN KEY (catId) REFERENCES Cat(id)
 );
 
+ALTER TABLE Health (
+    ADD CONSTRAINT fKeyHCatID FOREIGN KEY (catId) REFERENCES Cat(id)
+);
