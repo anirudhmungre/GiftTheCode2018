@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS Cat(
     behavior    VARCHAR(256),
     outcome     VARCHAR(64),
     healthId    INT NOT NULL,
-    locId       INT NOT NULL
+    locId       INT NOT NULL,
+    PRIMARY KEY(id)
 );
