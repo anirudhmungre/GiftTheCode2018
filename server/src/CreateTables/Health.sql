@@ -6,6 +6,5 @@ CREATE TABLE IF NOT EXISTS Health(
     rabiesVacDate   DATE,
     medNotes        VARCHAR(256),
     catId           INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (catId) REFERENCES Cat(id)
+    PRIMARY KEY (id)
 );
