@@ -2,7 +2,6 @@ CREATE TABLE IF NOT EXISTS Cat(
     id          INT NOT NULL,
     cName       VARCHAR(64),
     dob         DATE,
-    img         BLOB(),
     sex         CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
