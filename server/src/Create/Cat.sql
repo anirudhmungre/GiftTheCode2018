@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS Cat(
     age         INT NOT NULL,
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
+    pair        INT,
     stat        BIT CHECK (fixed IN (1, 0, NULL)) DEFAULT 0,
     locId       INT NOT NULL,
     adopterId   INT,

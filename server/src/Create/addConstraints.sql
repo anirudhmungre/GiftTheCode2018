@@ -1,6 +1,7 @@
 ALTER TABLE Cat (
     ADD CONSTRAINT fKeyLocID FOREIGN KEY (locId) REFERENCES Loc(id),
-    ADD CONSTRAINT fKeyAdoptID  FOREIGN KEY (adopterID) REFERENCES Adopter(id)
+    ADD CONSTRAINT fKeyAdoptID  FOREIGN KEY (adopterID) REFERENCES Adopter(id),
+    ADD CONSTRAINT fKeyPair FOREIGN KEY (pair) REFERENCES Cat(id)
 );
 
 ALTER TABLE Adopter (
