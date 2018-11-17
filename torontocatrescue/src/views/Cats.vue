@@ -1,16 +1,66 @@
 <template>
   <div>
-    <md-table v-model="searched" md-sort="name" md-sort-order="asc" md-card md-fixed-header md-height="700px">
+    <md-speed-dial class="md-bottom-right">
+      <md-speed-dial-target class="md-accent" @click="showDialog = true">
+        <md-icon class="md-morph-initial">add</md-icon>
+        <md-icon class="md-morph-final">pets</md-icon>
+      </md-speed-dial-target>
+    </md-speed-dial>
+
+    <md-dialog :md-active.sync="showDialog">
+      <md-dialog-title>Add new Cat</md-dialog-title>
+      <md-dialog-content>
+        <form novalidate class="md-layout" @submit.prevent="validateUser">
+          <md-field>
+            <label for="first-name">First Name</label>
+            <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
+            <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
+          </md-field>
+          <md-field>
+            <label for="last-name">Last Name</label>
+            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
+            <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
+          </md-field>
+          <md-field>
+            <label for="gender">Gender</label>
+            <md-select name="gender" id="gender" v-model="form.gender" md-dense :disabled="sending">
+              <md-option></md-option>
+              <md-option value="M">M</md-option>
+              <md-option value="F">F</md-option>
+            </md-select>
+            <span class="md-error">The gender is required</span>
+          </md-field>
+          <md-field>
+            <label for="age">Age</label>
+            <md-input type="number" id="age" name="age" autocomplete="age" v-model="form.age" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.age.required">The age is required</span>
+            <span class="md-error" v-else-if="!$v.form.age.maxlength">Invalid age</span>
+          </md-field>
+          <md-field>
+            <label for="email">Email</label>
+            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
+            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+          </md-field>
+        </form>
+      </md-dialog-content>
+      <md-dialog-actions>
+        <md-button class="md-raised md-primary" @click="showDialog = false">Cancel</md-button>
+        <md-button class="md-raised md-accent" @click="showDialog = false">Save</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+
+    <md-table v-model="searched" md-sort="name" md-sort-order="asc" md-card md-fixed-header>
       <md-table-toolbar>
         <div class="md-toolbar-section-start">
           <h1 class="md-title">Cats</h1>
         </div>
-
         <md-field md-clearable class="md-toolbar-section-end">
           <md-input placeholder="Search by name..." v-model="search" @input="searchOnTable" />
         </md-field>
       </md-table-toolbar>
-
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
@@ -31,13 +81,12 @@
     if (term) {
       return items.filter(item => toLower(item.name).includes(toLower(term)))
     }
-
     return items
   }
-
   export default {
-    name: 'TableSearch',
+    name: 'Cats',
     data: () => ({
+      showDialog: false,
       search: null,
       searched: [],
       users: [
@@ -195,5 +244,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .md-dialog {
+    max-width: 768px;
+  }
 </style>

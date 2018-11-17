@@ -21,10 +21,22 @@
               <span class="md-list-item-text">All Cats</span>
             </md-list-item>
           </router-link>
+          <router-link to="/dashboard/newcat">
+            <md-list-item>
+              <md-icon>add</md-icon>
+              <span class="md-list-item-text">Add new Cat</span>
+            </md-list-item>
+          </router-link>
           <router-link to="/dashboard/about">
             <md-list-item>
               <md-icon>info</md-icon>
               <span class="md-list-item-text">About</span>
+            </md-list-item>
+          </router-link>
+          <router-link to="/dashboard/user">
+            <md-list-item>
+              <md-icon>person</md-icon>
+              <span class="md-list-item-text">User</span>
             </md-list-item>
           </router-link>
         </md-list>
@@ -54,5 +66,9 @@ export default {
   .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
+  }
+
+  img {
+    padding: 1em;
   }
 </style>
