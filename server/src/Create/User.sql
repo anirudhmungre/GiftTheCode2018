@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Staff(
+CREATE TABLE IF NOT EXISTS User(
     id           INT NOT NULL,
     sName        VARCHAR(128),
     addr         VARCHAR(256),
