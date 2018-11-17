@@ -14,7 +14,15 @@ router.get('/', (req, res) => {
 
 router.get('/add', (req, res) => {
     let post = {
-        
+        id: req.hashId,
+        cName: req.name,
+        dob: req.dob,
+        sex: req.sex,
+        breed: req.breed,
+        behavior: req.behavior,
+        stat: req.stat,
+        locId: req.locId,
+        adopterId: null 
     }
     sql.query('INSERT INTO Cat SET ?', post, 
     (results, fields) => {
@@ -35,9 +43,33 @@ router.get('/add', (req, res) => {
 })
 
 router.get('/edit', (req, res) => {
-    return res.json(resp.make()
-        
-    )
+    let post = {
+        id: req.id
+        cName: req.name,
+        dob: req.dob,
+        sex: req.sex,
+        breed: req.breed,
+        behavior: req.behavior,
+        stat: req.stat,
+        locId: req.locId,
+        adopterId: req.adopterId 
+    }
+    sql.query('UPDATE Cat SET cName=?, dob=?, sex=?, breed=?, behavior=?, stat=?, locId=?, adopterId=? WHERE id=?', post, 
+    (results, fields) => {
+        sql.quitConnection()
+        return res.json(resp.make()
+            .setMessage("Query successful!")
+            .setResponseCode(200)
+        )
+    }, (error) => {
+        if (error){
+            return res.json(resp.make()
+                .setError(error)
+                .setResponseCode(500)
+                .setMessage("There was an error :(")
+            )
+        }
+    })
 })
 
 router.get('/all', (req, res) => {
