@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS Health(
     flvTested       BIT CHECK (flvTested IN (1, 0, NULL)),
     fvrcpVacDate    DATE,
     rabiesVacDate   DATE,
-    fixed           BIT CHECK (fixed IN (1, 0, NULL)),
+    fixed           BIT CHECK (fixed IN (1, 0)) NOT NULL DEFAULT 0,
     medNotes        VARCHAR(256),
     catId           INT NOT NULL,
     PRIMARY KEY (id)

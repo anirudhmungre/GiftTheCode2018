@@ -2,8 +2,8 @@ INSERT INTO Cat (id, cName, dob, img, sex, breed, behavior, bondedID, outcome, l
 /*ID should really be autoIncremented */
 /*We should create a locID for adopted cats, for a placeholder, I am using -1. We also need to have a similar value for Euthanized :(*/
 /*Outcome could be removed as the information is ESSENTIALLY stored in location*/
-VALUES (0, "Patrick", 2018-05-11, Patrick.png, M, "Domestic Short-haired", "Patrick is young kitten who loves to play", NULL, "Adopted", 3),
-VALUES (1, "Midnight", 2011-07-01, Midnight.png, M, "Bombay", "Midnight is super friendly with everyone", NULL, "IN TCR", 2, NULL),
+VALUES (0, "Patrick", 2011-05-11, Patrick.png, M, "Domestic Short-haired", "Patrick is young kitten who loves to play", NULL, "Adopted", 3),
+VALUES (1, "Midnight", 2018-07-01, Midnight.png, M, "Bombay", "Midnight is super friendly with everyone", NULL, "IN TCR", 2, NULL),
 VALUES (2, "JJ", 2015-04-12, JJ.png, M, "Scottish Fold", "JJ is a timid, but loving cat", "Adopted", -1, 2),
 VALUES (3, "Bob", 2008-01-19, Bob.png, M, "Maine Coon", "Bob is an old cat. Trying to not make it depressing cus Im euthanizing this cat", NULL, "Euthanized", HEAVEN, NULL),
 VALUES (4, "Abby", 2014-06-14, Abby.png, F, "Russian Blue", "Abby is incredibly loving and is bonded with her best friend Gabby", 5, "At Vet", 1, NULL),
