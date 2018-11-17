@@ -10,40 +10,24 @@
     <md-dialog :md-active.sync="showDialog">
       <md-dialog-title>Add new Cat</md-dialog-title>
       <md-dialog-content>
-        <form novalidate class="md-layout" @submit.prevent="validateUser">
-          <md-field>
-            <label for="first-name">First Name</label>
-            <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-            <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
-          </md-field>
-          <md-field>
-            <label for="last-name">Last Name</label>
-            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-            <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
-          </md-field>
-          <md-field>
-            <label for="gender">Gender</label>
-            <md-select name="gender" id="gender" v-model="form.gender" md-dense :disabled="sending">
-              <md-option></md-option>
-              <md-option value="M">M</md-option>
-              <md-option value="F">F</md-option>
-            </md-select>
-            <span class="md-error">The gender is required</span>
-          </md-field>
-          <md-field>
-            <label for="age">Age</label>
-            <md-input type="number" id="age" name="age" autocomplete="age" v-model="form.age" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.age.required">The age is required</span>
-            <span class="md-error" v-else-if="!$v.form.age.maxlength">Invalid age</span>
-          </md-field>
-          <md-field>
-            <label for="email">Email</label>
-            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
-          </md-field>
+        <form class="md-layout">
+          <div class="md-layout">
+            <md-field>
+              <label for="cname">Cat Name</label>
+              <md-input name="cname" id="cname" autocomplete="catname" />
+            </md-field>
+            <md-field>
+              <md-datepicker v-model="selectedDate">
+                <label>Date of Birth</label>
+              </md-datepicker>
+            </md-field>
+            <md-field>
+              <label for="location">Location</label>
+              <md-select v-model="location" name="location" id="location">
+                <md-option value="fight-club">Fight Club</md-option>
+              </md-select>
+            </md-field>
+          </div>
         </form>
       </md-dialog-content>
       <md-dialog-actions>
@@ -87,6 +71,7 @@
     name: 'Cats',
     data: () => ({
       showDialog: false,
+      selectedDate: null,
       search: null,
       searched: [],
       users: [

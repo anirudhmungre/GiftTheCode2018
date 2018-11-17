@@ -21,12 +21,6 @@
               <span class="md-list-item-text">All Cats</span>
             </md-list-item>
           </router-link>
-          <router-link to="/dashboard/newcat">
-            <md-list-item>
-              <md-icon>add</md-icon>
-              <span class="md-list-item-text">Add new Cat</span>
-            </md-list-item>
-          </router-link>
           <router-link to="/dashboard/about">
             <md-list-item>
               <md-icon>info</md-icon>

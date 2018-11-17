@@ -4,7 +4,6 @@ import Default from './views/Default.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Cats from './views/Cats.vue'
-import NewCat from './views/NewCat.vue'
 import User from './views/User.vue'
 import Login from './views/Login.vue'
 
@@ -32,12 +31,6 @@ export default new Router({
         components: {
           default: Default,
           content: About
-        }
-      }, {
-        path:"newcat",
-        components: {
-          default: Default,
-          content: NewCat
         }
       }, {
         path:"cats",
