@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS Cat(
     cName       VARCHAR(64),
     dob         DATE,
     sex         CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    age         INT NOT NULL,
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
     pair        INT,
