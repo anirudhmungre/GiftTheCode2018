@@ -1,22 +1,18 @@
 <template>
-  <div class="home">
-    <md-card class="md-elevation-5">
-      <md-card-header>
-        <div class="md-title">Home</div>
-      </md-card-header>
-      <md-card-content>
-        Hello
-      </md-card-content>
-    </md-card>
-  </div>
+  <md-empty-state 
+    style="height:100%"
+    class="md-accent"
+    md-icon="pets"
+    md-label="Nothing to see"
+    md-description="This is just a placeholder">
+  </md-empty-state>
 </template>
 
 <script>
-export default {
-  name: 'Home'
-}
+  export default {
+    name: 'EmptyStateRounded'
+  }
 </script>
-
 <style scoped lang="scss">
 
 </style>

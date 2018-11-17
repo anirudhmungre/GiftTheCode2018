@@ -4,6 +4,7 @@ import Default from './views/Default.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Cats from './views/Cats.vue'
+import User from './views/User.vue'
 import Login from './views/Login.vue'
 
 Vue.use(Router)
@@ -36,6 +37,12 @@ export default new Router({
         components: {
           default: Default,
           content: Cats
+        }
+      }, {
+        path:"user",
+        components: {
+          default: Default,
+          content: User
         }
       }]
     },
