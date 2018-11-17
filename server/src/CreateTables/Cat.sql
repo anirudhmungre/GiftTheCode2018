@@ -9,7 +9,5 @@ CREATE TABLE IF NOT EXISTS Cat(
     outcome     VARCHAR(64),
     locId       INT NOT NULL,
     adopterID   INT,
-    PRIMARY KEY(id),
-    FOREIGN KEY (locId) REFERENCES Loc(id),
-    FOREIGN KEY (adopterID) REFERENCES Adopter(id)
+    PRIMARY KEY(id)
 );
