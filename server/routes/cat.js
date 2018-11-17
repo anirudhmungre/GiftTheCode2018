@@ -10,4 +10,40 @@ router.get('/', (req, res) => {
     )
 })
 
+router.get('/add', (req, res) => {
+    return res.json(resp.make()
+
+    )
+})
+
+router.get('/edit', (req, res) => {
+    return res.json(resp.make()
+        
+    )
+})
+
+router.get('/all', (req, res) => {
+    return res.json(resp.make()
+        
+    )
+})
+
+router.get('/local', (req, res) => {
+    return res.json(resp.make()
+        
+    )
+})
+
+router.get('/pair', (req, res) => {
+    return res.json(resp.make()
+        
+    )
+})
+
+router.get('/add', (req, res) => {
+    return res.json(resp.make()
+        
+    )
+})
+
 module.exports = router
