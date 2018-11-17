@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS Cat(
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
     pair        INT,
-    stat        BIT CHECK (fixed IN (1, 0, NULL)) DEFAULT 0,
+    stat        BIT DEFAULT 0,
+    locId       INT NOT NULL,
     adopterId   INT,
     PRIMARY KEY(id)
 );
