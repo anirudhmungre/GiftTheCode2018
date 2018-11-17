@@ -27,7 +27,7 @@ router.get('/test', (req, res) => {
 
 router.get('/viewCats', (req, res) => {
     let sQuery, result
-    sQuery = fs.readFile('../src/Query/availableCats.sql', 'utf-8')
+    sQuery = fs.readFile('../src/Query/adoptableCats.sql', 'utf-8')
     sql.establishConnection()
     result = sql.query(sQuery, function(){
         sql.quitConnection()
