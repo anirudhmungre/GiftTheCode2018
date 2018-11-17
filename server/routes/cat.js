@@ -93,9 +93,23 @@ router.get('/all', (req, res) => {
 })
 
 router.get('/local', (req, res) => {
-    return res.json(resp.make()
-        
-    )
+    sql.query('SELECT * FROM Cat WHERE locId=?;', [req.body.locId],
+    (results, fields) => {
+        sql.quitConnection()
+        return res.json(resp.make()
+            .setMessage("Query successful!")
+            .setResponseCode(200)
+            .setdata(results)
+        )
+    }, (error) => {
+        if (error){
+            return res.json(resp.make()
+                .setError(error)
+                .setResponseCode(500)
+                .setMessage("There was an error :(")
+            )
+        }
+    })
 })
 
 router.get('/pair', (req, res) => {
