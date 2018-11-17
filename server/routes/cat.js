@@ -118,10 +118,4 @@ router.get('/pair', (req, res) => {
     )
 })
 
-router.get('/add', (req, res) => {
-    return res.json(resp.make()
-        
-    )
-})
-
 module.exports = router
