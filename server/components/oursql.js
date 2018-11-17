@@ -10,7 +10,7 @@ class OurSQL {
             port: dbconfig.port,
             user: dbconfig.username,
             password: dbconfig.password,
-            database: dbconfig.databse
+            database: dbconfig.database
         })
         this.connection.on('error', function(error) {
             logger("A db Error has occured: " + JSON.stringify(error), 3)
@@ -38,6 +38,15 @@ class OurSQL {
     }
     query(sqlStatement, inserts, callback) {
         return this.connection.query(sqlStatement, inserts, function (error, results, fields) {
+            if (error) {
+                logger("Error querrying the db: " + JSON.stringify(error), 3)
+            } else {
+                callback(results, fields)
+            }
+        })
+    }
+    query(sqlStatement, callback) {
+        return this.connection.query(sqlStatement, function (error, results, fields) {
             if (error) {
                 logger("Error querrying the db: " + JSON.stringify(error), 3)
             } else {
