@@ -7,7 +7,6 @@ try {
     logger("Starting server", 1)
     const PORT = 1337
     const express = require('express')
-    const path = require("path")
     const bodyParser = require('body-parser')
     const helmet = require('helmet')
     const DDoS = require('dddos')
