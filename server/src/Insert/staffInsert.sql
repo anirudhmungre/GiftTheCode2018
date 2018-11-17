@@ -1,0 +1,5 @@
+INSERT INTO Staff(id, sName, addr, email, phone, empType, locID) VALUES (0, "John Snow", "1423 Adelaide St, Toronto", "jsnow@tcr.ca", 1234325432, 'Paid', 8);
+INSERT INTO Staff(id, sName, addr, email, phone, empType, locID) VALUES (0, "Miranda Willows", "4231 Queen St W, Toronto", "mwillows@tcr.ca", 3123894321, 'Volunteer', 8);
+INSERT INTO Staff(id, sName, addr, email, phone, empType, locID) VALUES (0, "Samantha Kay", "2321 Queen St W, Toronto", "skay@tcr.ca", 9854567493, 'CEO', 9);
+INSERT INTO Staff(id, sName, addr, email, phone, empType, locID) VALUES (0, "Steven Story", "100 University Ave, Toronto", "sstory@tcr.ca", 9230122319, 'Volunteer', 9);
+INSERT INTO Staff(id, sName, addr, email, phone, empType, locID) VALUES (0, "Hannah Gerber", "1500 Adelaide St, Toronto", "hgerber@tcr.ca", 9052317432, 'Paid', 9);
