@@ -49,5 +49,28 @@ router.get('/adoptableCats', (req, res) => {
     })
 })
 
+router.get('/addCat', (req, res) => {
+    sql.establishConnection()
+    fs.readFile('./src/Query/adoptableCats.sql', 'utf-8', (err, sQuery) => {
+        // console.error(err)
+        sql.query(sQuery, 
+            (result, fields) =>{
+                return res.json(resp.make()
+                    .setMessage("Query Successful!")
+                    .setReponseCode(200)
+                    .setData(result)
+                )
+            }, (err, result) => {
+            if (err){
+                return res.json(resp.make()
+                    .setError(err)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+            sql.quitConnection()
+        })
+    })
+})
 
 module.exports = router
