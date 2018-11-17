@@ -11,8 +11,14 @@
         <md-list>
           <router-link to="/dashboard">
             <md-list-item>
-              <md-icon>dashboard</md-icon>
-              <span class="md-list-item-text">Dashboard</span>
+              <md-icon>home</md-icon>
+              <span class="md-list-item-text">Home</span>
+            </md-list-item>
+          </router-link>
+          <router-link to="/dashboard/cats">
+            <md-list-item>
+              <md-icon>pets</md-icon>
+              <span class="md-list-item-text">All Cats</span>
             </md-list-item>
           </router-link>
           <router-link to="/dashboard/about">
@@ -23,7 +29,7 @@
           </router-link>
         </md-list>
       </md-app-drawer>
-      <md-app-content>
+      <md-app-content md-height="100vh">
         <router-view name="content"></router-view>
       </md-app-content>
     </md-app>
