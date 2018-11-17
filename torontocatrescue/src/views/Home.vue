@@ -1,6 +1,13 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <md-card class="md-elevation-5">
+      <md-card-header>
+        <div class="md-title">Home</div>
+      </md-card-header>
+      <md-card-content>
+        Hello
+      </md-card-content>
+    </md-card>
   </div>
 </template>
 

@@ -32,13 +32,17 @@
 
 <script>
 export default {
-  name: 'default'
+  name: 'Default'
 }
 </script>
 
 <style lang="scss" scoped>
   .md-app {
     height: 100vh;
+  }
+
+  .md-app-content {
+    background: rgb(236, 236, 236);
   }
 
   .md-drawer {

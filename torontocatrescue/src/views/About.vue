@@ -1,6 +1,13 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <md-card class="md-elevation-5">
+      <md-card-header>
+        <div class="md-title">About</div>
+      </md-card-header>
+      <md-card-content>
+        Hello
+      </md-card-content>
+    </md-card>
   </div>
 </template>
 

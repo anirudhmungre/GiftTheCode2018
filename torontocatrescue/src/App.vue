@@ -14,7 +14,8 @@ export default {
   @import "~vue-material/dist/theme/engine";
   @include md-register-theme("default", (
     primary: #0e4e8b,
-    accent: #00ae98
+    accent: #00ae98,
+    main: #cccccc
   ));
   @import "~vue-material/dist/theme/all";
 </style>

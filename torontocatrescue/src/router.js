@@ -19,6 +19,12 @@ export default new Router({
         content: Home
       },
       children: [{
+        path:"",
+        components: {
+          default: Default,
+          content: Home
+        }
+      }, {
         path:"about",
         components: {
           default: Default,
