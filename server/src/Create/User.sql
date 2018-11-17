@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS User(
     empType      VARCHAR(64) CHECK (type IN ('Paid', 'Volunteer', 'CEO'))
     usermame     VARCHAR(64),
     passwd       VARCHAR(64),
-    locID        INT NOT NULL,
+    locId        INT NOT NULL,
     PRIMARY KEY (id)
 );
