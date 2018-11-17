@@ -1,9 +1,8 @@
 "use strict"
 const express = require('express')
+const mysql = require('mysql')
 let router = express.Router()
-const {
-    resp
-} = require('../components/response')
+const { resp } = require('../components/response')
 
 router.get('/', (req, res) => {
     return res.json(resp.make()
@@ -24,5 +23,6 @@ router.get('/test', (req, res) => {
         })
     )
 })
+
 
 module.exports = router
