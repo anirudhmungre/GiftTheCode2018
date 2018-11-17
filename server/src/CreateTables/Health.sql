@@ -5,5 +5,7 @@ CREATE TABLE IF NOT EXISTS Health(
     fvrcpVacDate    DATE,
     rabiesVacDate   DATE,
     medNotes        VARCHAR(256),
-    PRIMARY KEY (id)
+    catId           INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (catId) REFERENCES Cat(id)
 );
