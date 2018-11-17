@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS Cat(
     dob         DATE,
     intakeDate  DATE,
     fostDate    DATE,
-    sex         CHAR(1) NOT NULL CHECK (Gender IN ('M', 'F')),
+    sex         CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
     outcome     VARCHAR(64),
