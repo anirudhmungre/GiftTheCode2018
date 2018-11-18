@@ -38,7 +38,7 @@ router.post('/add', (req, res) => {
         locId: req.body.locId,
         adopterId: null
     }
-    sql.query('INSERT INTO Cat SET ?;', post,
+    sql.query('INSERT INTO Cat SET ?', post,
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -68,7 +68,7 @@ router.post('/edit', (req, res) => {
         locId: req.body.locId,
         adopterId: req.body.adopterId
     }
-    sql.query('UPDATE Cat SET cName=?, dob=?, sex=?, breed=?, behavior=?, stat=?, locId=?, adopterId=? WHERE id=?;', post,
+    sql.query('UPDATE Cat SET cName=?, dob=?, sex=?, breed=?, behavior=?, stat=?, locId=?, adopterId=? WHERE id=?', post,
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -87,7 +87,7 @@ router.post('/edit', (req, res) => {
 })
 
 router.get('/all', (req, res) => {
-    sql.query('SELECT C.*, I.img FROM Cat AS C, Img AS I WHERE C.id=I.catId;',
+    sql.query('SELECT C.*, I.img FROM Cat AS C, Img AS I WHERE C.id=I.catId',
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -127,7 +127,7 @@ router.post('/local', (req, res) => {
 })
 
 router.get('/pair', (req, res) => {
-    sql.query('SELECT * FROM Cat WHERE pair NOT NULL;',
+    sql.query('SELECT * FROM Cat WHERE pair NOT NULL',
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -148,13 +148,13 @@ router.get('/pair', (req, res) => {
 
 router.post('/gmayg', (req, res) => {
     let catId = {catId: req.body.catId}
-    sql.query('SELECT * FROM Cat WHERE id=?;', catId,
+    sql.query('SELECT * FROM Cat WHERE id=?', catId,
         (cResults, cFields) => {
-            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=? ORDER BY L.inDate DESC;', catId,
+            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=? ORDER BY L.inDate DESC', catId,
                 (lResults, lFields) => {
-                    sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?;', catId,
+                    sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?', catId,
                         (hResults, hFields) => {
-                            sql.query('SELECT I.img FROM Img AS I, Cat AS C WHERE C.id=I.catId AND C.id=?;', catId,
+                            sql.query('SELECT I.img FROM Img AS I, Cat AS C WHERE C.id=I.catId AND C.id=?', catId,
                                 (iResults, iFields) => {
                                     return res.json(resp.make()
                                         .setMessage("Query successful!")
