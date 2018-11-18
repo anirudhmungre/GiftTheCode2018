@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 
 router.post('/new', (req, res) => {
     let post = {
-        id: req.body.hashId,
         sName: req.body.name,
         addr: req.body.addr,
         email: req.body.email,
@@ -25,7 +24,7 @@ router.post('/new', (req, res) => {
         hashPass: req.body.hashPass,
         locId: req.body.locId
     }
-    sql.query('INSERT INTO User (id, sName, addr, email, phone, empType, username, passwd, locId) VALUES (' 
+    sql.query('INSERT INTO User (sName, addr, email, phone, empType, username, passwd, locId) VALUES (' 
         + Object.values(post).map(x => con.escape(x)) + ')',
         (results, fields) => {
             // sql.quitConnection()
