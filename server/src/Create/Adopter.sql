@@ -3,9 +3,9 @@ CREATE TABLE IF NOT EXISTS Adopter(
     aName       VARCHAR(128),
     aAddress    VARCHAR(256),
     email       VARCHAR(128),
-    phone       INT(10),
+    phone       VARCHAR(64),
     screenDate  DATE,
-    staffConfirmationID INT,
+    userConfirmationId INT,
     catId       INT,
     screenRes   BIT CHECK (flvTested IN (1, 0, NULL)),
     PRIMARY KEY (id)

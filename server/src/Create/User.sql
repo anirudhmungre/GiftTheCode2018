@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS User(
     addr         VARCHAR(256),
     email        VARCHAR(128),
     phone        INT(10),
-    empType      VARCHAR(64) CHECK (type IN ('Paid', 'Volunteer', 'CEO'))
-    usermame     VARCHAR(64),
+    empType      VARCHAR(64) CHECK (type IN ('Global Admin', 'Staff')),
+    username     VARCHAR(64),
     passwd       VARCHAR(64),
-    locID        INT NOT NULL,
+    locId        INT NOT NULL,
     PRIMARY KEY (id)
 );

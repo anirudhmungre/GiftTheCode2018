@@ -40,7 +40,7 @@ router.get('/add', (req, res) => {
     }
     sql.query('INSERT INTO Cat SET ?;', post, 
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
@@ -70,7 +70,7 @@ router.get('/edit', (req, res) => {
     }
     sql.query('UPDATE Cat SET cName=?, dob=?, sex=?, breed=?, behavior=?, stat=?, locId=?, adopterId=? WHERE id=?;', post, 
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
@@ -89,11 +89,11 @@ router.get('/edit', (req, res) => {
 router.get('/all', (req, res) => {
     sql.query('SELECT * FROM Cat;', 
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
-            .setdata(results)
+            .setData(results)
         )
     }, (error) => {
         if (error){
@@ -109,11 +109,11 @@ router.get('/all', (req, res) => {
 router.get('/local', (req, res) => {
     sql.query('SELECT * FROM Cat WHERE locId=?;', [req.body.locId],
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
-            .setdata(results)
+            .setData(results)
         )
     }, (error) => {
         if (error){
@@ -129,11 +129,11 @@ router.get('/local', (req, res) => {
 router.get('/pair', (req, res) => {
     sql.query('SELECT * FROM Cat WHERE pair NOT NULL;',
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
-            .setdata(results)
+            .setData(results)
         )
     }, (error) => {
         if (error){
@@ -144,6 +144,50 @@ router.get('/pair', (req, res) => {
             )
         }
     })
+})
+
+router.get('/gmayg', (req, res) => {
+    let catId = [req.body.catId]
+    sql.query('SELECT * FROM Cat WHERE id=?;', catId,
+        (cResults, cFields) => {
+            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=? ORDER BY L.inDate DESC;', catId,
+                (lResults, lFields) => {
+                    sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?;', catId,
+                        (hResults, hFields) => {
+                            // sql.quitConnection()
+                            return res.json(resp.make()
+                                .setMessage("Query successful!")
+                                .setResponseCode(200)
+                                .setData(cResults + lResults + hResults)
+                            )
+                        }), (error) => {
+                            if (error){
+                                return res.json(resp.make()
+                                    .setError(error)
+                                    .setResponseCode(500)
+                                    .setMessage("There was an error :(")
+                                )
+                            }
+                        }
+                }, (error) => {
+                    if (error){
+                        return res.json(resp.make()
+                            .setError(error)
+                            .setResponseCode(500)
+                            .setMessage("There was an error :(")
+                        )
+                    }
+                }
+            )
+        }, (error) => {
+            if (error){
+                return res.json(resp.make()
+                    .setError(error)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+        })
 })
 
 module.exports = router
