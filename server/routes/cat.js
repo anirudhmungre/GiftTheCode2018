@@ -154,12 +154,22 @@ router.get('/gmayg', (req, res) => {
                 (lResults, lFields) => {
                     sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?;', catId,
                         (hResults, hFields) => {
-                            // sql.quitConnection()
-                            return res.json(resp.make()
-                                .setMessage("Query successful!")
-                                .setResponseCode(200)
-                                .setData(cResults + lResults + hResults)
+                            sql.query('SELECT I.img FROM Img AS I, Cat AS C WHERE C.id=I.catId AND C.id=?;'), catId,
+                                (iResults, iFields) => {
+                                    return res.json(resp.make()
+                                    .setMessage("Query successful!")
+                                    .setResponseCode(200)
+                                    .setData(cResults + lResults + hResults + iResults)
                             )
+                                }, (error) => {
+                                    if (error){
+                                        return res.json(resp.make()
+                                            .setError(error)
+                                            .setResponseCode(500)
+                                            .setMessage("There was an error :(")
+                                        )
+                                    }
+                                }
                         }), (error) => {
                             if (error){
                                 return res.json(resp.make()
