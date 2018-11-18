@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     )
 })
 
-router.get('/new', (req, res) => {
+router.post('/new', (req, res) => {
     let post = {
         id: req.body.hashId,
         sName: req.body.name,
@@ -44,7 +44,7 @@ router.get('/new', (req, res) => {
         })
 })
 
-router.get('/edit', (req, res) => {
+router.post('/edit', (req, res) => {
     let post = {
         id: req.body.id,
         sName: req.body.name,
