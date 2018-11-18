@@ -146,4 +146,48 @@ router.get('/pair', (req, res) => {
     })
 })
 
+router.get('/gmayg', (req, res) => {
+    let catId = [req.body.catId]
+    sql.query('SELECT * FROM Cat WHERE id=?;', catId,
+        (cResults, cFields) => {
+            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=? ORDER BY L.inDate DESC;', catId,
+                (lResults, lFields) => {
+                    sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?;', catId,
+                        (hResults, hFields) => {
+                            sql.quitConnection()
+                            return res.json(resp.make()
+                                .setMessage("Query successful!")
+                                .setResponseCode(200)
+                                .setdata(cResults + lResults + hResults)
+                            )
+                        }), (error) => {
+                            if (error){
+                                return res.json(resp.make()
+                                    .setError(error)
+                                    .setResponseCode(500)
+                                    .setMessage("There was an error :(")
+                                )
+                            }
+                        }
+                }, (error) => {
+                    if (error){
+                        return res.json(resp.make()
+                            .setError(error)
+                            .setResponseCode(500)
+                            .setMessage("There was an error :(")
+                        )
+                    }
+                }
+            )
+        }, (error) => {
+            if (error){
+                return res.json(resp.make()
+                    .setError(error)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+        })
+})
+
 module.exports = router
