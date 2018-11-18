@@ -2,7 +2,10 @@
   <div class="home">
       <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
-        <span class="md-title">Toronto Cat Rescue</span>
+        <div id="toolbar-wrapper">
+          <span class="md-title">Toronto Cat Rescue</span>
+          <md-button>Logout</md-button>
+        </div>
       </md-app-toolbar>
       <md-app-drawer md-permanent="full">
         <md-toolbar class="md-transparent" md-elevation="0">
@@ -19,12 +22,6 @@
             <md-list-item>
               <md-icon>pets</md-icon>
               <span class="md-list-item-text">All Cats</span>
-            </md-list-item>
-          </router-link>
-          <router-link to="/dashboard/about">
-            <md-list-item>
-              <md-icon>info</md-icon>
-              <span class="md-list-item-text">About</span>
             </md-list-item>
           </router-link>
           <router-link to="/dashboard/user">
@@ -67,5 +64,12 @@ export default {
   }
   img {
     padding: 1em;
+  }
+  #toolbar-wrapper {
+    width:100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>

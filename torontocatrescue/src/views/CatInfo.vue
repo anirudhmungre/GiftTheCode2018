@@ -18,7 +18,8 @@ export default {
   name: 'CatInfo',
   props: ['id'],
   mounted: function() {
-    axios.post("/cat/gmayg", {
+    axios
+    .post("/cat/gmayg", {
       catId: this.id
     })
     .then(response => {
