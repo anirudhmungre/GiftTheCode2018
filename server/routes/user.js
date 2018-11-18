@@ -78,13 +78,13 @@ router.post('/auth', (req, res) => {
         sql.quitConnection()
         if (results.passwd == req.body.hashPwd) {
             return res.json(resp.make()
-                .setMessage("Query sucessful!")
+                .setMessage("Login sucessful!")
                 .setResponseCode(200)
                 .setData({auth: true})
             )
         } else {
             return res.json(resp.make()
-                .setMessage("Query successful!")
+                .setMessage("Invalid login details")
                 .setResponseCode(200)
                 .setData({auth: false})
             )
