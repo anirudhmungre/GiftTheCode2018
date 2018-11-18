@@ -12,19 +12,13 @@
                 This is the home tab
               </md-tab>
               <md-tab id="tab-pages" md-label="Add New User">
-                <form class="md-layout" @submit.prevent="createNewUser">
+                <form class="md-layout" @submit.prevent="">
                   <div class="md-layout-item">
                     <div class="md-layout md-gutter">
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
-                          <label for="first-name">First Name</label>
-                          <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" />
-                        </md-field>
-                      </div>
-                      <div class="md-layout-item md-small-size-100">
-                        <md-field>
-                          <label for="last-name">Last Name</label>
-                          <md-input name="last-name" id="last-name" autocomplete="last-name" v-model="form.lastName" />
+                          <label for="first-name">Name</label>
+                          <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="newUserForm.name" />
                         </md-field>
                       </div>
                     </div>
@@ -32,45 +26,83 @@
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
                           <label for="email">Email</label>
-                          <md-input name="email" id="email" autocomplete="email" v-model="form.email" />
+                          <md-input name="email" id="email" autocomplete="email" v-model="newUserForm.email" />
                         </md-field>
                       </div>
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
                           <label for="phone-number">Phone Number</label>
-                          <md-input name="phone-number" id="phone-number" autocomplete="phone" v-model="form.phone" />
+                          <md-input name="phone-number" id="phone-number" autocomplete="phone" v-model="newUserForm.phone" />
                         </md-field>
                       </div>
                     </div>
                     <div class="md-layout md-gutter">
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
-                          <label for="address">Address</label>
-                          <md-input name="address" id="address" autocomplete="address" v-model="form.address" />
+                          <label for="addr">Address</label>
+                          <md-input name="addr" id="addr" autocomplete="addr" v-model="newUserForm.addr" />
                         </md-field>
                       </div>
                     </div>
                     <div class="md-layout md-gutter">
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
-                          <label for="empType">Employee Type</label>
-                          <md-select v-model="form.empType" name="empType" id="empType">
-                            <md-option value="fight-club">Fight Club</md-option>
-                            <md-option value="godfather">Godfather</md-option>
+                          <label for="type">Employee Type</label>
+                          <md-select v-model="newUserForm.type" name="type" id="type">
+                            <md-option value="0">User</md-option>
+                            <md-option value="1">Admin</md-option>
                           </md-select>
                         </md-field>
                       </div>
                     </div>
                     <div class="md-layout md-gutter">
+                      <div class="md-layout-item md-small-size-100">
+                        <md-field>
+                          <label for="locId">Location</label>
+                          <md-select v-model="newUserForm.locId" name="locId" id="locId">
+                            <md-option v-for="location in locationSelectList" v-bind:key="location.id" :value="location.id">{{ location.addr }} : {{ location.typ }}</md-option>
+                          </md-select>
+                        </md-field>
+                      </div>
+                    </div>
+                    <div class="md-layout md-gutter">
+                      <div class="md-layout-item md-small-size-100">
+                        <md-field>
+                          <label for="username">Username</label>
+                          <md-input name="username" id="username" autocomplete="username" v-model="newUserForm.username" />
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-small-size-100">
+                        <md-field md-has-password>
+                          <label for="password">Password</label>
+                          <md-input name="password" id="password" autocomplete="password" v-model="newUserForm.password" type="password"></md-input>
+                        </md-field>
+                      </div>
+                    </div>
+                    <div class="md-layout md-gutter">
                       <div class="md-layout-item">
-                        <md-button class="md-raised md-primary md-alignment-top-right">Add New User</md-button>
+                        <md-button class="md-raised md-primary md-alignment-top-right" @click="createNewUser()">Add New User</md-button>
                       </div>
                     </div>
                   </div>
                 </form>
               </md-tab>
               <md-tab id="tab-posts" md-label="View Users">
-
+                <md-table v-model="users" md-sort="id" md-sort-order="asc" md-card md-fixed-header >
+                  <md-table-toolbar>
+                    <div class="md-toolbar-section-start">
+                      <h1 class="md-title">Users</h1>
+                    </div>
+                  </md-table-toolbar>
+                  <md-empty-state
+                    md-icon="person"
+                    md-label="No Users Found"
+                    md-description="Cannot find any Users to display">
+                  </md-empty-state>
+                  <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single">
+                    <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
+                  </md-table-row>
+                </md-table>
               </md-tab>
             </md-tabs>
           </md-card-content>
@@ -82,23 +114,63 @@
 
 
 <script>
+import axios from "axios"
+
 export default {
-  name: 'Admin',
+  name: "Admin",
   data() {
     return {
-      form: {
-        firstName: null
-      }
+      locationSelectList: [],
+      newUserForm: {
+        id: null,
+        name: null,
+        addr: null,
+        email: null,
+        phone: null,
+        type: null,
+        username: null,
+        hashPass: null,
+        locId: null
+      },
+      users: []
     }
+  },
+  mounted() {
+    console.log("m")
+    axios
+      .get("/user/all")
+      .then(response => {
+        console.log(response)
+        this.users = response.data.data
+      })
+      .catch(e => {
+        console.error(e)
+      })
+      axios
+        .get("/cat/locations")
+        .then(response => {
+          console.log({response})
+          this.locationSelectList = response.data.data
+        })
+        .catch(e => {
+          console.error(e)
+        })
   },
   methods: {
     createNewUser() {
       console.log("thing")
+      axios
+      .post("/user/new",  this.newUserForm)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(e => {
+        console.error(e)
+      })
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-
 </style>

@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "node-base64-image": "^1.0.5",
     "sha256": "^0.2.0",
+    "uuid": "^3.3.2",
     "vue": "^2.5.17",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1"
