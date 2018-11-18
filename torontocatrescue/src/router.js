@@ -6,6 +6,7 @@ import About from './views/About.vue'
 import Cats from './views/Cats.vue'
 import CatInfo from './views/CatInfo.vue'
 import User from './views/User.vue'
+import Admin from './views/Admin.vue'
 import Login from './views/Login.vue'
 
 Vue.use(Router)
@@ -44,6 +45,12 @@ export default new Router({
         components: {
           default: Default,
           content: User
+        }
+      }, {
+        path:"admin",
+        components: {
+          default: Default,
+          content: Admin
         }
       }, {
         path:"cat/info/:id",

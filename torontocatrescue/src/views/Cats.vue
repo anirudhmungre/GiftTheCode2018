@@ -99,7 +99,6 @@
         <md-table-cell md-label="Date of Birth" md-sort-by="dob">{{ (new Date(item.dob)).toLocaleDateString() }}</md-table-cell>
         <md-table-cell md-label="Location" md-sort-by="locId">{{ item.locId }}</md-table-cell>
         <md-table-cell md-label="Breed" md-sort-by="breed">{{ item.breed }}</md-table-cell>
-        <md-table-cell md-label="Behavior" md-sort-by="behavior">{{ item.behavior }}</md-table-cell>
         <md-table-cell md-label="Bonded Pair" md-sort-by="pair">{{ (item.pair ? "Y" : "N") }}</md-table-cell>
         <md-table-cell md-label="Edit" md-sort-by="id">
           <md-button class="md-primary" @click="showEditDialog(item)">
@@ -117,6 +116,7 @@
 </template>
 <script>
   import axios from 'axios'
+  import sha256 from 'sha256'
 
   const toLower = text => {
     return text.toString().toLowerCase()
@@ -207,7 +207,14 @@
       },
       submitNewCat() {
         let formData = this.newCatFieldsToJSON()
-        console.log(formData)
+        axios
+        .post("/cat/add", formData)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(e => {
+          console.error(e)
+        })
         this.resetNewCatFields()
       },
       submitEditCat() {
@@ -215,12 +222,15 @@
       },
       newCatFieldsToJSON() {
         return {
-          cname: this.cname,
-          gender: this.gender,
+          id: sha256(this.cname+this.location+this.dob),
+          cName: this.cname,
+          sex: this.gender,
           dob: (new Date(this.selectedDate)).toISOString(),
           location: this.location,
           breed: this.breed,
-          status: this.status
+          behavior: this.behavior,
+          stat: this.status,
+          locId: this.location
         }
       },
       resetNewCatFields() {
@@ -236,7 +246,6 @@
         this.showDialog = false
       },
       setDone (id, index) {
-        console.log(this.selectedDate)
         this[id] = true
         this.secondStepError = null
         if (index) {

@@ -33,6 +33,12 @@
               <span class="md-list-item-text">User</span>
             </md-list-item>
           </router-link>
+          <router-link to="/dashboard/admin">
+            <md-list-item>
+              <md-icon>lock</md-icon>
+              <span class="md-list-item-text">Admin</span>
+            </md-list-item>
+          </router-link>
         </md-list>
       </md-app-drawer>
       <md-app-content md-height="100vh">
