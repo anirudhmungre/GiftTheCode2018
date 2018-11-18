@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS Adopter(
     aName       VARCHAR(128),
     aAddress    VARCHAR(256),
     email       VARCHAR(128),
-    phone       INT(10),
+    phone       VARCHAR(64),
     screenDate  DATE,
     userConfirmationId INT,
     catId       INT,
