@@ -160,7 +160,7 @@ router.post('/pair/bond', (req, res) => {
         + 'UPDATE Cat SET pair = ' + con.escape(post.catId1) + ' WHERE id = ' + con.escape(post.catId2), 
         (results, fields) => {
             return res.json(resp.make()
-                .setMessage("Query successful!")
+                .setMessage("Paired! Query successful!")
                 .setResponseCode(200)
                 .setData(results)
             )
@@ -173,6 +173,47 @@ router.post('/pair/bond', (req, res) => {
                 )
             }
         })
+})
+
+router.post('/pair/break', (req, res) => {
+    let post = { catId: req.body.id }
+    sql.query('UPDATE Cat SET pair = NULL WHERE id = (SELECT pair FROM Cat WHERE id = ' + con.escape(post.catId) + '); '
+        + 'UPDATE Cat SET pair = NULL WHERE id = ' + con.escape(post.catId) + '; ',
+        (results, fields) => {
+            return res.json(resp.make()
+                .setMessage("Query successful!")
+                .setResponseCode(200)
+                .setData(results)
+            )
+        }, (error) => {
+            if (error) {
+                return res.json(resp.make()
+                    .setError(error)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+        }
+    )
+})
+
+router.get('/locations', (req, res) => {
+    sql.query('SELECT * FROM Loc', 
+        (results, fields) => {
+            return res.json(resp.make()
+                .setMessage("Query successful!")
+                .setResponseCode(200)
+                .setData(results)
+            )
+        }), (error) => {
+            if (error) {
+                return res.json(resp.make()
+                    .setError(error)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+        }
 })
 
 router.post('/gmayg', (req, res) => {
