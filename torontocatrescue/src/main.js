@@ -6,10 +6,8 @@ import axios from 'axios'
 
 import 'vue-material/dist/vue-material.min.css'
 
-axios.defaults.baseURL = 'http://10.0.79.109:1337'
-
+axios.defaults.baseURL = 'http://10.0.79.109:1337/api'
 Vue.config.productionTip = false
-
 Vue.use(VueMaterial)
 
 new Vue({

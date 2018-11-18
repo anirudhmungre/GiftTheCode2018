@@ -78,7 +78,7 @@
         <md-button class="md-raised md-accent" @click="submitEditCat()">Save Edit</md-button>
       </md-dialog-actions>
     </md-dialog>
-    <md-table v-model="searched" md-sort="id" md-sort-order="asc" md-card md-fixed-header>
+    <md-table v-model="searched" md-sort="id" md-sort-order="asc" md-card md-fixed-header >
       <md-table-toolbar>
         <div class="md-toolbar-section-start">
           <h1 class="md-title">Cats</h1>
@@ -87,19 +87,20 @@
           <md-input placeholder="Search by name..." v-model="search" @input="searchOnTable" />
         </md-field>
       </md-table-toolbar>
+      <md-empty-state
+        md-icon="pets"
+        md-label="No Cats available"
+        md-description="Cannot find any cats to display">
+      </md-empty-state>
       <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single">
-        <md-table-cell md-label="IMG" md-sort-by="id">
-          <img src="../assets/logo_colour.png">
-        </md-table-cell>
         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.gender }}</md-table-cell>
+        <md-table-cell md-label="Name" md-sort-by="cName">{{ item.cName }}</md-table-cell>
+        <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.sex }}</md-table-cell>
         <md-table-cell md-label="Date of Birth" md-sort-by="dob">{{ (new Date(item.dob)).toLocaleDateString() }}</md-table-cell>
-        <md-table-cell md-label="Location" md-sort-by="location">{{ item.location }}</md-table-cell>
+        <md-table-cell md-label="Location" md-sort-by="locId">{{ item.locId }}</md-table-cell>
         <md-table-cell md-label="Breed" md-sort-by="breed">{{ item.breed }}</md-table-cell>
-        <md-table-cell md-label="Status" md-sort-by="status">{{ item.status }}</md-table-cell>
         <md-table-cell md-label="Behavior" md-sort-by="behavior">{{ item.behavior }}</md-table-cell>
-        <md-table-cell md-label="Bonded Pair" md-sort-by="pair">{{ item.pair }}</md-table-cell>
+        <md-table-cell md-label="Bonded Pair" md-sort-by="pair">{{ (item.pair ? "Y" : "N") }}</md-table-cell>
         <md-table-cell md-label="Edit" md-sort-by="id">
           <md-button class="md-primary" @click="showEditDialog(item)">
             <md-icon>edit</md-icon>
@@ -115,19 +116,31 @@
   </div>
 </template>
 <script>
-  
+  import axios from 'axios'
 
   const toLower = text => {
     return text.toString().toLowerCase()
   }
   const searchByName = (items, term) => {
     if (term) {
-      return items.filter(item => toLower(item.name).includes(toLower(term)))
+      return items.filter(item => toLower(item.cName).includes(toLower(term)))
     }
     return items
   }
   export default {
     name: 'Cats',
+    mounted: function() {
+      axios.get("/cat/all")
+      .then(response => {
+        let allCats = response.data.data
+        console.log(allCats)
+        this.searched = allCats
+        this.cats = allCats
+      })
+      .catch(e => {
+        console.error(e)
+      })
+    },
     data: () => ({
       active: 'first',
       first: false,
@@ -152,19 +165,7 @@
 
       tableSelected: {},
 
-      users: [
-        {
-          id: 0,
-          name: "Hank",
-          gender: 1,
-          dob: (new Date()).toISOString(),
-          location: 0,
-          breed: "cat",
-          status: 0,
-          behavior: "good",
-          pair: 1
-        }
-      ]
+      cats: []
     }),
     methods: {
       padZero(num) {
@@ -192,11 +193,11 @@
         this.first = false
         this.second = false
         this.third = false
-        this.gender = item.gender
-        this.location = item.location
-        this.cname = item.name
+        this.gender = (item.sex === "M" ? 1 : 0)
+        this.location = item.locId
+        this.cname = item.cName
         this.breed = item.breed
-        this.status = item.status
+        this.status = item.stat
         this.behavior = item.behavior
         this.selectedDate = this.datepickerDateFormat(new Date(item.dob))
         this.pair = item.pair
@@ -244,11 +245,11 @@
         }
       },
       searchOnTable () {
-        this.searched = searchByName(this.users, this.search)
+        this.searched = searchByName(this.cats, this.search)
       }
     },
     created () {
-      this.searched = this.users
+      this.searched = this.cats
     }
   }
 </script>

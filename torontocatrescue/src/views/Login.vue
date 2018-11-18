@@ -7,7 +7,7 @@
         <div class="md-title">Toronto Cat Rescue</div>
         <div class="md-body-1">login to the admin portal</div>
       </div>
-      <form class="form" v-on:submit.prevent="auth" method="POST" >
+      <form class="form" v-on:submit.prevent="auth">
         <md-field>
           <label>Username</label>
           <md-input v-model="login.email" autofocus></md-input>
