@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS Cat(
     id          INT NOT NULL,
+    uuid        VARCHAR(256),
     cName       VARCHAR(64),
     dob         DATE,
     sex         CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
