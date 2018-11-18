@@ -151,9 +151,9 @@ router.get('/pair', (req, res) => {
         })
 })
 
-router.post('/bondPair', (req, res) => {
+router.post('/pair/bond', (req, res) => {
     let post = {
-        catId1: req.body.id1
+        catId1: req.body.id1,
         catId2: req.body.id2
     }
     sql.query('UPDATE Cat SET pair = ' + con.escape(post.catId2) + ' WHERE id = ' + con.escape(post.catId1) + '; '
