@@ -71,9 +71,9 @@ router.get('/edit', (req, res) => {
 router.post('/auth', (req, res) => {
     let post = {
         username: req.body.username,
-        passwd: req.body.password    
+        passwd: req.body.hashPwd    
     }
-    sql.query('SELECT passwd FROM User WHERE username=?;', [post.username],
+    sql.query('SELECT passwd FROM User WHERE username=?;', post.username,
     (results, fields) => {
         // sql.quitConnection()
         if (results.passwd == req.body.hashPwd) {
