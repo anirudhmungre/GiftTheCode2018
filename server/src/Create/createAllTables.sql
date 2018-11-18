@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Cat(
     breed       VARCHAR(64),
     behavior    VARCHAR(256),
     pair        INT,
-    stat        BIT DEFAULT 0,
+    stat        INT(1) DEFAULT 0,
     locId       INT NOT NULL,
     adopterId   INT,
     PRIMARY KEY(id)
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Adopter(
     screenDate  DATE,
     userConfirmationId INT,
     catId       INT,
-    screenRes   BIT CHECK (flvTested IN (1, 0, NULL)),
+    screenRes   INT(1),
     PRIMARY KEY (id)
 );
 CREATE TABLE IF NOT EXISTS Health(
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Health(
     flvTested       BIT CHECK (flvTested IN (1, 0, NULL)),
     fvrcpVacDate    DATE,
     rabiesVacDate   DATE,
-    fixed           BIT NOT NULL DEFAULT 0 CHECK (fixed IN (1, 0)),
+    fixed           INT(1) NOT NULL DEFAULT 0,
     medNotes        VARCHAR(256),
     catId           INT NOT NULL,
     PRIMARY KEY (id)
