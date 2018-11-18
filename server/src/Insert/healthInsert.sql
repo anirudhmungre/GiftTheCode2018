@@ -7,5 +7,5 @@ INSERT INTO Health (id, fivTested, flvTested, fvrcpVacDate, rabiesVacDate, fixed
  (5, 1, 1, 2014-09-15, 2014-10-01, "Walks with a limp. Ready for adoption", 5),
  (6, 1, 1, 2014-01-05, 2014-01-03, "Ready for Adoption", 6),
  (7, NULL, NULL, NULL, 2013-05-07, "THIS CAT IS DEAD", 7),
- (8, 1, 1, NULL, ,2012-02-04, "Needs FLV Test" , 8),
+ (8, 1, 1, NULL, 2012-02-04, "Needs FLV Test" , 8),
  (9, NULL, 1, 2011-03-13, 2011-03-16, "Ready for Adoption", 9)
