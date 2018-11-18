@@ -101,6 +101,12 @@
                   </md-empty-state>
                   <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single">
                     <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
+                    <md-table-cell md-label="Name" md-sort-by="name">{{ item.sName }}</md-table-cell>
+                    <md-table-cell md-label="Address" md-sort-by="addr">{{ item.addr }}</md-table-cell>
+                    <md-table-cell md-label="Email" md-sort-by="email">{{ item.email }}</md-table-cell>
+                    <md-table-cell md-label="Phone" md-sort-by="phone">{{ item.phone }}</md-table-cell>
+                    <md-table-cell md-label="Username" md-sort-by="username">{{ item.username }}</md-table-cell>
+                    <md-table-cell md-label="Location" md-sort-by="locId">{{ item.locId }}</md-table-cell>
                   </md-table-row>
                 </md-table>
               </md-tab>
