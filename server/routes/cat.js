@@ -6,10 +6,10 @@ let router = express.Router()
 let sql = new OurSQL()
 
 const birth = (isoDate) => {
-    date = new Date(isoDate)
-    year = date.getFullYear()
-    month = date.getMonth() + 1
-    dt = date.getDate()
+    let date = new Date(isoDate)
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let dt = date.getDate()
     if (dt < 10) {
         dt = '0' + dt
     }
@@ -28,17 +28,20 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
     let post = {
-        id: req.body.hashId,
-        cName: req.body.name,
+        cName: req.body.cName,
         dob: birth(req.body.dob),
         sex: req.body.sex,
+        age: req.body.age,
         breed: req.body.breed,
         behavior: req.body.behavior,
+        pair: req.body.pair,
         stat: req.body.stat,
         locId: req.body.locId,
         adopterId: null
     }
-    sql.query('INSERT INTO Cat SET ?', post,
+    let con = sql.getConnection()
+    sql.query('INSERT INTO Cat (cName, dob, sex, age, breed, behavior, pair, stat, locId, adopterId) VALUES (' 
+        + Object.values(post).map(x => con.escape(x)) + ')',
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -68,7 +71,9 @@ router.post('/edit', (req, res) => {
         locId: req.body.locId,
         adopterId: req.body.adopterId
     }
-    sql.query('UPDATE Cat SET cName=?, dob=?, sex=?, breed=?, behavior=?, stat=?, locId=?, adopterId=? WHERE id=?', post,
+    sql.query('UPDATE Cat SET cName=' + con.escape(post.cName) + ', dob=' + con.escape(post.dob) + ', sex=' + con.escape(post.sex) 
+        + ', breed=' + con.escape(post.breed) + ', behavior=' + con.escape(post.behavior) + ', stat=' + con.escape(post.stat) 
+        + ', locId=' + con.escape(post.locId) + ', adopterId=' + con.escape(post.adopterId) + ' WHERE id=' + con.escape(post.id),
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -87,7 +92,7 @@ router.post('/edit', (req, res) => {
 })
 
 router.get('/all', (req, res) => {
-    sql.query('SELECT C.*, I.img FROM Cat AS C, Img AS I WHERE C.id=I.catId',
+    sql.query('SELECT * FROM Cat',
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -147,14 +152,14 @@ router.get('/pair', (req, res) => {
 })
 
 router.post('/gmayg', (req, res) => {
-    let catId = {catId: req.body.catId}
-    sql.query('SELECT * FROM Cat WHERE id=?', catId,
+    let post = {catId: req.body.catId}
+    sql.query('SELECT * FROM Cat WHERE id=' + con.escape(post.catId),
         (cResults, cFields) => {
-            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=? ORDER BY L.inDate DESC', catId,
+            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=' + con.escape(post.catId) + ' ORDER BY L.inDate DESC',
                 (lResults, lFields) => {
-                    sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?', catId,
+                    sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=' + con.escape(post.catId),
                         (hResults, hFields) => {
-                            sql.query('SELECT I.img FROM Img AS I, Cat AS C WHERE C.id=I.catId AND C.id=?', catId,
+                            sql.query('SELECT I.img FROM Img AS I, Cat AS C WHERE C.id=I.catId AND C.id=' + con.escape(post.catId),
                                 (iResults, iFields) => {
                                     return res.json(resp.make()
                                         .setMessage("Query successful!")

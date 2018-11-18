@@ -22,11 +22,11 @@ router.get('/new', (req, res) => {
         phone: req.body.phone,
         empType: req.body.type,
         username: req.body.username,
-        hashPass: req.body.hashPass
+        hashPass: req.body.hashPass,
         locId: req.body.locId
     }
-    sql.query('INSERT INTO User (id, sName, addr, email, phone, empType, username, passwd, locId) VALUES ' 
-        + Object.values(post).map(x => con.escape(x)),
+    sql.query('INSERT INTO User (id, sName, addr, email, phone, empType, username, passwd, locId) VALUES (' 
+        + Object.values(post).map(x => con.escape(x)) + ')',
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()

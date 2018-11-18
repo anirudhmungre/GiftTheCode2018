@@ -51,5 +51,6 @@ try {
     logger("Listening on port " + PORT, 1)
     logger("Server started successfully", 1)
 } catch (e) {
+    console.log(e)
     logger('An Error has occured!' + e, 3)
 }
