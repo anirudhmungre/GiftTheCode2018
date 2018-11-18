@@ -40,7 +40,7 @@ router.get('/add', (req, res) => {
     }
     sql.query('INSERT INTO Cat SET ?;', post, 
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
@@ -70,7 +70,7 @@ router.get('/edit', (req, res) => {
     }
     sql.query('UPDATE Cat SET cName=?, dob=?, sex=?, breed=?, behavior=?, stat=?, locId=?, adopterId=? WHERE id=?;', post, 
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
@@ -89,11 +89,11 @@ router.get('/edit', (req, res) => {
 router.get('/all', (req, res) => {
     sql.query('SELECT * FROM Cat;', 
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
-            .setdata(results)
+            .setData(results)
         )
     }, (error) => {
         if (error){
@@ -109,11 +109,11 @@ router.get('/all', (req, res) => {
 router.get('/local', (req, res) => {
     sql.query('SELECT * FROM Cat WHERE locId=?;', [req.body.locId],
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
-            .setdata(results)
+            .setData(results)
         )
     }, (error) => {
         if (error){
@@ -129,11 +129,11 @@ router.get('/local', (req, res) => {
 router.get('/pair', (req, res) => {
     sql.query('SELECT * FROM Cat WHERE pair NOT NULL;',
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
-            .setdata(results)
+            .setData(results)
         )
     }, (error) => {
         if (error){
@@ -154,11 +154,11 @@ router.get('/gmayg', (req, res) => {
                 (lResults, lFields) => {
                     sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=?;', catId,
                         (hResults, hFields) => {
-                            sql.quitConnection()
+                            // sql.quitConnection()
                             return res.json(resp.make()
                                 .setMessage("Query successful!")
                                 .setResponseCode(200)
-                                .setdata(cResults + lResults + hResults)
+                                .setData(cResults + lResults + hResults)
                             )
                         }), (error) => {
                             if (error){
