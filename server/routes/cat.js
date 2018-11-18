@@ -107,7 +107,7 @@ router.get('/all', (req, res) => {
 })
 
 router.post('/local', (req, res) => {
-    sql.query('SELECT * FROM Cat WHERE locId=?;', [req.body.locId],
+    sql.query('SELECT * FROM Cat WHERE locId=' + con.escape(req.body.locId),
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
