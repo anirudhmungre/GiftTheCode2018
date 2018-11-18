@@ -30,8 +30,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+import sha256 from 'sha256'
+
 export default {
-  name: "App",
+  name: "Login",
   data() {
     return {
       loading: false,
@@ -44,11 +47,24 @@ export default {
   methods: {
     auth() {
       this.loading = true
-      setTimeout(() => {
-        console.log()
-        this.loading = false
-        this.$router.push("/dashboard")
-      }, 2000)
+      let hashedPass = sha256(this.login.password)
+      console.log(hashedPass)
+      axios.post("/user/auth", {
+        username: this.login.username,
+        password: hashedPass
+      })
+      .then(response => {
+        console.log(response)
+        if (response.data.data.auth) {
+          this.loading = false
+          this.$router.push("/dashboard")
+        } else {
+          console.log("INVALID LOGIN STUFF")
+        }
+      })
+      .catch(e => {
+        console.error(e)
+      })
     }
   }
 }

@@ -12,9 +12,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'CatInfo',
-  props: ['id']
+  props: ['id'],
+  mounted: function() {
+    axios.post("/cat/gmayg", {
+      catId: this.id
+    })
+    .then(response => {
+      console.log(response)
+    })
+  }
 }
 </script>
 

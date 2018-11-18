@@ -133,7 +133,6 @@
       axios.get("/cat/all")
       .then(response => {
         let allCats = response.data.data
-        console.log(allCats)
         this.searched = allCats
         this.cats = allCats
       })
