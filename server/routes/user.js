@@ -4,6 +4,7 @@ const { resp } = require('../components/response')
 const { OurSQL } = require('../components/oursql')
 let router = express.Router()
 let sql = new OurSQL()
+let con = sql.getConnection()
 
 router.get('/', (req, res) => {
     return res.json(resp.make()
@@ -20,9 +21,12 @@ router.get('/new', (req, res) => {
         email: req.body.email,
         phone: req.body.phone,
         empType: req.body.type,
+        username: req.body.username,
+        hashPass: req.body.hashPass
         locId: req.body.locId
     }
-    sql.query('INSERT INTO User SET ?', post,
+    sql.query('INSERT INTO User (id, sName, addr, email, phone, empType, username, passwd, locId) VALUES ' 
+        + Object.values(post).map(x => con.escape(x)),
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
@@ -50,7 +54,6 @@ router.get('/edit', (req, res) => {
         empType: req.body.type,
         locId: req.body.locId
     }
-    let con = sql.getConnection()
     sql.query('UPDATE User SET sName=' + con.escape(post.sName) + ', addr=' + con.escape(post.addr) 
         + ', email=' + con.escape(post.email) + ', phone=' + con.escape(post.phone) + ', empType=' + con.escape(post.empType) 
         + ', locId=' + con.escape(post.locId) + ' WHERE id=' + con.escape(post.id),
@@ -104,16 +107,7 @@ router.post('/auth', (req, res) => {
 })
 
 router.get('/all', (req, res) => {
-    let post = {
-        id: req.body.hashId,
-        sName: req.body.name,
-        addr: req.body.addr,
-        email: req.body.email,
-        phone: req.body.phone,
-        empType: req.body.type,
-        locId: req.body.locId
-    }
-    sql.query('SELECT * FROM User', post,
+    sql.query('SELECT * FROM User',
         (results, fields) => {
             // sql.quitConnection()
             return res.json(resp.make()
