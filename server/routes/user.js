@@ -24,7 +24,7 @@ router.get('/new', (req, res) => {
     }
     sql.query('INSERT INTO User SET ?', post,
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query successful!")
             .setResponseCode(200)
@@ -52,7 +52,7 @@ router.get('/edit', (req, res) => {
     }
     sql.query('UPDATE User SET id=?, sName=?, addr=?, email=?, phone=?, empType=?, locId=? WHERE id=?;', post,
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query sucessful!")
             .setResponseCode(200)
@@ -73,9 +73,9 @@ router.post('/auth', (req, res) => {
         username: req.body.username,
         passwd: req.body.hashPwd    
     }
-    sql.query('SELECT passwd FROM User WHERE username=req.body.username;', post,
+    sql.query('SELECT passwd FROM User WHERE username=?;', post.username,
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         if (results.passwd == req.body.hashPwd) {
             return res.json(resp.make()
                 .setMessage("Login sucessful!")
@@ -112,7 +112,7 @@ router.get('/all', (req, res) => {
     }
     sql.query('SELECT * FROM User;', post,
     (results, fields) => {
-        sql.quitConnection()
+        // sql.quitConnection()
         return res.json(resp.make()
             .setMessage("Query sucessful!")
             .setResponseCode(200)
