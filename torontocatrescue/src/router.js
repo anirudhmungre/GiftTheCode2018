@@ -4,6 +4,7 @@ import Default from './views/Default.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Cats from './views/Cats.vue'
+import CatInfo from './views/CatInfo.vue'
 import User from './views/User.vue'
 import Login from './views/Login.vue'
 
@@ -43,6 +44,16 @@ export default new Router({
         components: {
           default: Default,
           content: User
+        }
+      }, {
+        path:"cat/info/:id",
+        components: {
+          default: Default,
+          content: CatInfo
+        },
+        props: {
+          default: false,
+          content: true
         }
       }]
     },
