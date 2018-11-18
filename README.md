@@ -1,2 +1,7 @@
-# GiftTheCode2018
-Hackathon Gift the Code 2018
+# GiftTheCode2018 - Toronto Cat Rescue
+
+Addressing Challenge #2:
+
+Our solution to the proposed problem was to create an integrated database and web cat management system oriented with the focus of being user friendly for staff and volunteers of Toronto Cat Rescue based on criteria discussed with the organization. 
+
+It's a Full Stack Javascript web application with Express JS Routing, View JS Front End, and a MySQL Database as our Back End.
