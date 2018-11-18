@@ -10,7 +10,7 @@ VALUES
 (6, "Violet", '2013-11-19', 'F', 5,"American Bobtail", "Violet is a sweet cat with a love of all other animals", NULL, 1, 3, 0),
 (7, "Yimothy", '2009-07-14', 'M', 9, "Yaater", "Yimothy Yeetro is a Yeet Graduate of OnTechU", NULL, NULL, 4, NULL),
 (8, "Jasper", '2011-12-24', 'M', 7, "American Short-haired", "Jasper is very friendly with everyone", NULL, 1, 2, 3),
-(9, "Franky", '2010-02-06', 'M', 8, "Ocicat", "Franky is friendly with cats, not so friendly with dogs,", NULL, 1, 1, 4)
+(9, "Franky", '2010-02-06', 'M', 8, "Ocicat", "Franky is friendly with cats, not so friendly with dogs,", NULL, 1, 1, 4);
 
 /*ID should really be autoIncremented */
 /*We should create a locID for adopted cats, for a placeholder, I am using -1. We also need to have a similar value for Euthanized :(*/
