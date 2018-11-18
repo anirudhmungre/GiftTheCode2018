@@ -68,7 +68,7 @@ router.get('/edit', (req, res) => {
     })
 })
 
-router.get('/auth', (req, res) => {
+router.post('/auth', (req, res) => {
     let post = {
         username: req.body.username,
         passwd: req.body.hashPwd    
