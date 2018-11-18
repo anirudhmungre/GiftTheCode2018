@@ -10,7 +10,7 @@
       <form class="form" v-on:submit.prevent="auth">
         <md-field>
           <label>Username</label>
-          <md-input v-model="login.email" autofocus></md-input>
+          <md-input v-model="login.username" autofocus></md-input>
         </md-field>
         <md-field md-has-password>
           <label>Password</label>
@@ -39,7 +39,7 @@ export default {
     return {
       loading: false,
       login: {
-        email: "",
+        username: "",
         password: ""
       }
     }
@@ -55,11 +55,17 @@ export default {
       })
       .then(response => {
         console.log(response)
-        if (response.data.data.auth) {
-          this.loading = false
-          this.$router.push("/dashboard")
+        if (response.data.data) {
+          if (response.data.data.auth) {
+            this.loading = false
+            this.$router.push("/dashboard")
+          } else {
+            this.loading = false
+            console.log("INVALID LOGIN STUFF")
+          }
         } else {
-          console.log("INVALID LOGIN STUFF")
+          console.log("SOMETHING IS WRONG")
+          this.loading = false
         }
       })
       .catch(e => {
