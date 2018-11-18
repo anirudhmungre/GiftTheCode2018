@@ -1,7 +1,7 @@
 INSERT INTO Cat 
 (id, cName, dob, sex, age, breed, behavior, pair, stat, locId, adopterId)
 VALUES 
-(0, "Patrick", '2018-05-11', 'M', 1, "Domestic Short-haired", "Patrick is young kitten who loves to play", NULL, 1, 0, 2);/*
+(0, "Patrick", '2018-05-11', 'M', 1, "Domestic Short-haired", "Patrick is young kitten who loves to play", NULL, 1, 0, 2),
 (1, "Midnight", '2011-07-01', 'M', 7, "Bombay", "Midnight is super friendly with everyone", NULL, 0, 3, NULL),
 (2, "JJ", '2015-04-12', 'M', 3, "Scottish Fold", "JJ is a timid, but loving cat", NULL, 1, 8, 1),
 (3, "Bob", '2008-01-19', 'M', 10, "Maine Coon", "Bob is an old cat. Trying to not make it depressing cus Im euthanizing this cat", NULL, NULL, 4, NULL),
