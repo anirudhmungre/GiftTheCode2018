@@ -151,6 +151,30 @@ router.get('/pair', (req, res) => {
         })
 })
 
+router.post('/bondPair', (req, res) => {
+    let post = {
+        catId1: req.body.id1
+        catId2: req.body.id2
+    }
+    sql.query('UPDATE Cat SET pair = ' + con.escape(post.catId2) + ' WHERE id = ' + con.escape(post.catId1) + '; '
+        + 'UPDATE Cat SET pair = ' + con.escape(post.catId1) + ' WHERE id = ' + con.escape(post.catId2), 
+        (results, fields) => {
+            return res.json(resp.make()
+                .setMessage("Query successful!")
+                .setResponseCode(200)
+                .setData(results)
+            )
+        }, (error) => {
+            if (error) {
+                return res.json(resp.make()
+                    .setError(error)
+                    .setResponseCode(500)
+                    .setMessage("There was an error :(")
+                )
+            }
+        })
+})
+
 router.post('/gmayg', (req, res) => {
     let post = {catId: req.body.catId}
     sql.query('SELECT * FROM Cat WHERE id=' + con.escape(post.catId),
