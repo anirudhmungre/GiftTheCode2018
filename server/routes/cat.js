@@ -4,6 +4,7 @@ const { resp } = require('../components/response')
 const { OurSQL } = require('../components/oursql')
 let router = express.Router()
 let sql = new OurSQL()
+let con = sql.getConnection()
 
 const birth = (isoDate) => {
     let date = new Date(isoDate)
@@ -39,7 +40,6 @@ router.post('/add', (req, res) => {
         locId: req.body.locId,
         adopterId: null
     }
-    let con = sql.getConnection()
     sql.query('INSERT INTO Cat (cName, dob, sex, age, breed, behavior, pair, stat, locId, adopterId) VALUES (' 
         + Object.values(post).map(x => con.escape(x)) + ')',
         (results, fields) => {
@@ -220,22 +220,27 @@ router.post('/gmayg', (req, res) => {
     let post = {catId: req.body.catId}
     sql.query('SELECT * FROM Cat WHERE id=' + con.escape(post.catId),
         (cResults, cFields) => {
-            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=' + con.escape(post.catId) + ' ORDER BY L.inDate DESC',
+            sql.query('SELECT L.id, L.addr, V.inDate, V.outDate FROM Cat AS C, Loc AS L, Visit AS V WHERE C.id=V.catId AND L.id=V.locId AND C.id=' + con.escape(post.catId) + ' ORDER BY V.inDate DESC',
                 (lResults, lFields) => {
                     sql.query('SELECT H.* FROM Cat AS C, Health AS H WHERE C.id=H.catId AND C.id=' + con.escape(post.catId),
                         (hResults, hFields) => {
                             sql.query('SELECT I.img FROM Img AS I, Cat AS C WHERE C.id=I.catId AND C.id=' + con.escape(post.catId),
                                 (iResults, iFields) => {
+                                    let result = {}
+                                    for(let key in cResults[0]) result[key] = cResults[0][key]
+                                    for(let key in lResults[0]) result[key] = lResults[0][key]
+                                    for(let key in hResults[0]) result[key] = hResults[0][key]
+                                    for(let key in iResults[0]) result[key] = iResults[0][key]
                                     return res.json(resp.make()
                                         .setMessage("Query successful!")
                                         .setResponseCode(200)
-                                        .setData(cResults + lResults + hResults + iResults)
+                                        .setData(result)
                                     )
                                 },
                                 (iError) => {
-                                    if (error) {
+                                    if (iError) {
                                         return res.json(resp.make()
-                                            .setError(error)
+                                            .setError(iError)
                                             .setResponseCode(500)
                                             .setMessage("There was an error :(")
                                         )
@@ -243,7 +248,7 @@ router.post('/gmayg', (req, res) => {
                                 })
                         },
                         (hError) => {
-                            if (error) {
+                            if (hError) {
                                 return res.json(resp.make()
                                     .setError(error)
                                     .setResponseCode(500)
@@ -253,9 +258,9 @@ router.post('/gmayg', (req, res) => {
                         })
                 },
                 (lError) => {
-                    if (error) {
+                    if (lError) {
                         return res.json(resp.make()
-                            .setError(error)
+                            .setError(lError)
                             .setResponseCode(500)
                             .setMessage("There was an error :(")
                         )
@@ -263,9 +268,9 @@ router.post('/gmayg', (req, res) => {
                 })
         },
         (cError) => {
-            if (error) {
+            if (cError) {
                 return res.json(resp.make()
-                    .setError(error)
+                    .setError(cError)
                     .setResponseCode(500)
                     .setMessage("There was an error :(")
                 )

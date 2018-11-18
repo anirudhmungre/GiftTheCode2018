@@ -112,6 +112,7 @@ router.get('/all', (req, res) => {
             return res.json(resp.make()
                 .setMessage("Query sucessful!")
                 .setResponseCode(200)
+                .setData(results)
             )
         }, (error) => {
             if (error) {
